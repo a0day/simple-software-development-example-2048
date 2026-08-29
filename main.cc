@@ -25,6 +25,7 @@ int main(){
                 cout<<"input direction (WASD or q): ";
                 string input;
                 getline(cin, input);
+                if(!getline(cin, input)) continue; 
                 if(input.length()!=1 || 
                 (input[0]!='w' && input[0]!='a' && input[0]!='s' && input[0]!='d' 
                 && input[0]!='W' && input[0]!='A' && input[0]!='S' && input[0]!='D' && input[0]!='q' && input[0]!='Q')){
