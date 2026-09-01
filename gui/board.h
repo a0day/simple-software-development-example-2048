@@ -9,8 +9,11 @@
 class Board{
 public:
     bool init();
-    void draw(const Nums& nums);
     void close();
+
+    void draw(const Nums& nums);
+    void drawMessage(bool win);
+    void present(){SDL_RenderPresent(renderer);}
 
 private:
     static constexpr int WIDTH = 480;
@@ -26,6 +29,10 @@ private:
     SDL_Texture* digit_tex[11] = {};
     float tex_w[11] = {};
     float tex_h[11] = {};
+
+    SDL_Texture* mes_tex[2] = {};
+    float mes_w[2] = {};
+    float mes_h[2] = {};
 };
 
 #endif
