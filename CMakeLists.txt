@@ -11,19 +11,24 @@ set(SDL3_ttf_DIR "D:/SDL/SDL3_ttf-3.2.2/x86_64-w64-mingw32/lib/cmake/SDL3_ttf")
 find_package(SDL3 REQUIRED)
 find_package(SDL3_ttf REQUIRED)
 
-add_executable(2048
+add_executable(2048_cli
     cli/main.cc
     common/nums.cc
 )
 
-target_include_directories(2048 PRIVATE common)
+target_include_directories(2048_cli PRIVATE common)
 
-add_executable(board_test
-    gui/sdl_board_test.cc
+add_executable(2048_gui
+    gui/main.cc
+    gui/board.cc
+    common/nums.cc
 )
 
-target_link_libraries(board_test PRIVATE
+target_include_directories(2048_gui PRIVATE common)
+
+target_link_libraries(2048_gui PRIVATE
     SDL3::SDL3
+    SDL3_ttf::SDL3_ttf
 )
 
 # 构建完成后自动拷贝 SDL3 运行时 DLL 到 exe 所在目录
@@ -31,14 +36,18 @@ target_link_libraries(board_test PRIVATE
 set(SDL3_DLL "D:/SDL/SDL3-3.4.14/x86_64-w64-mingw32/bin/SDL3.dll")
 set(SDL3_TTF_DLL "D:/SDL/SDL3_ttf-3.2.2/x86_64-w64-mingw32/bin/SDL3_ttf.dll")
 
-function(copy_sdl_dlls target)
+# 把运行期资源（DLL、字体等）拷贝到目标 exe 所在目录
+# 用法: copy_assets(<目标名> <源文件>...)
+function(copy_assets target)
     add_custom_command(TARGET ${target} POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
-            "${SDL3_DLL}" "${SDL3_TTF_DLL}"
+            ${ARGN}
             $<TARGET_FILE_DIR:${target}>
     )
 endfunction()
 
-copy_sdl_dlls(board_test)
-
-# sdl_window_test.cc 仅保留作为 SDL3 API 参考，不参与构建
+copy_assets(2048_gui
+    "${SDL3_DLL}"
+    "${SDL3_TTF_DLL}"
+    "${CMAKE_SOURCE_DIR}/resources/arial.ttf"
+)

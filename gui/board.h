@@ -1,0 +1,31 @@
+#ifndef board_h
+#define board_h
+
+#include <SDL3/SDL.h>
+#include <SDL3_ttf/SDL_ttf.h>
+#include "nums.h"
+#include <string>
+
+class Board{
+public:
+    bool init();
+    void draw(const Nums& nums);
+    void close();
+
+private:
+    static constexpr int WIDTH = 480;
+    static constexpr int HEIGHT = 480;
+
+    static constexpr float gap = 20;
+    static constexpr float cell = (WIDTH - 5*gap)/4;
+
+    SDL_Window* window = nullptr;
+    SDL_Renderer* renderer = nullptr;
+    TTF_Font* font = nullptr;
+
+    SDL_Texture* digit_tex[11] = {};
+    float tex_w[11] = {};
+    float tex_h[11] = {};
+};
+
+#endif
