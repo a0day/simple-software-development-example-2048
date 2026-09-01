@@ -31,7 +31,7 @@ target_link_libraries(2048_gui PRIVATE
     SDL3_ttf::SDL3_ttf
 )
 
-# 构建完成后自动拷贝 SDL3 运行时 DLL 到 exe 所在目录
+# 构建完成后自动拷贝 SDL3 运行时 DLL 到 exe 所在目录 根据自己下载的 SDL3 地址修改路径
 # 这样清空 build 重新构建后不会丢失 DLL
 set(SDL3_DLL "D:/SDL/SDL3-3.4.14/x86_64-w64-mingw32/bin/SDL3.dll")
 set(SDL3_TTF_DLL "D:/SDL/SDL3_ttf-3.2.2/x86_64-w64-mingw32/bin/SDL3_ttf.dll")
@@ -49,5 +49,5 @@ endfunction()
 copy_assets(2048_gui
     "${SDL3_DLL}"
     "${SDL3_TTF_DLL}"
-    "${CMAKE_SOURCE_DIR}/resources/arial.ttf"
+    "${CMAKE_SOURCE_DIR}/resources/arial.ttf" #字体文件
 )

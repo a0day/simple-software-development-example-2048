@@ -13,6 +13,7 @@ void Nums::spawn(){
 Nums::Nums() : rng(std::random_device{}()), xydist(0, 3), numdist(0, 9) {
     spawn();
     spawn();
+    score = 0;
 }
 
 bool Nums::move(unsigned char direction){
@@ -99,6 +100,7 @@ bool Nums::merge(int *t){
         if(t[i] == t[i+1]){
             t[i] *= 2;
             t[i+1] = 0;
+            score += t[i];
             i+=2;
             flag = true;
         }

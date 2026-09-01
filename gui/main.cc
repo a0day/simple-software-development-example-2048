@@ -24,18 +24,25 @@ int main(int argc, char *argv[]){
             if(event.type == SDL_EVENT_QUIT){
                 running = false;
             }
-            else if(event.type == SDL_EVENT_KEY_DOWN && !event.key.repeat && !game_over){
-                char dir = 0;
-                switch(event.key.key){
-                    case SDLK_UP:    dir = 'w'; break;
-                    case SDLK_DOWN:  dir = 's'; break;
-                    case SDLK_LEFT:  dir = 'a'; break;
-                    case SDLK_RIGHT: dir = 'd'; break; 
+            else if(event.type == SDL_EVENT_KEY_DOWN && !event.key.repeat){
+                if(event.key.key == SDLK_R){
+                    nums.reset();
+                    game_over = false;
+                    game_win = false;
                 }
-                if(dir && nums.move(dir)){
-                    nums.spawn();
-                    if(nums.isWin()){game_over=true;game_win = true;}
-                    if(nums.isLose()){game_over=true;game_win = false;}
+                else if(!game_over){
+                    char dir = 0;
+                    switch(event.key.key){
+                        case SDLK_UP:    dir = 'w'; break;
+                        case SDLK_DOWN:  dir = 's'; break;
+                        case SDLK_LEFT:  dir = 'a'; break;
+                        case SDLK_RIGHT: dir = 'd'; break; 
+                    }
+                    if(dir && nums.move(dir)){
+                        nums.spawn();
+                        if(nums.isWin()){game_over=true;game_win = true;}
+                        else if(nums.isLose()){game_over=true;game_win = false;}
+                    }
                 }
             }
         }

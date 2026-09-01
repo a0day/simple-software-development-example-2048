@@ -46,7 +46,7 @@ bool Board::init(){
     for(int i = 0, val=2; i<11; ++i, val*=2){
         std::string s = std::to_string(val); 
 
-        SDL_Surface* surface = TTF_RenderText_Blended(font, s.c_str(), s.size(), {255,255,255,255});
+        SDL_Surface* surface = TTF_RenderText_Blended(font, s.c_str(), s.size(), fg[i]);
         if(!surface){
             SDL_Log("surface create failed: %s", SDL_GetError());
             TTF_CloseFont(font);
@@ -133,24 +133,27 @@ void Board::close(){
 }
 
 void Board::draw(const Nums& nums){
-    SDL_SetRenderDrawColor(renderer, 18, 24, 38, 255);
+    SDL_SetRenderDrawColor(renderer, bgColor.r, bgColor.g, bgColor.b, bgColor.a);
     SDL_RenderClear(renderer);
 
-    SDL_SetRenderDrawColor(renderer, 64, 128, 255, 255);
+
 
     for(int row = 0; row < 4 ;++row){
         for(int col=0; col<4; ++col){
             float tx = (col+1)*gap + col*cell;
             float ty = (row+1)*gap + row*cell;
-                
-            SDL_FRect rect ={tx, ty, cell, cell};
-            SDL_RenderFillRect(renderer,&rect);
 
             int val = nums.get(row,col);
-            if(val == 0) continue;
-
             int exp = 0;
             for(int v=val; v>1; v>>=1) ++exp;
+
+            SDL_Color color = (val==0) ? cellColor : bg[exp-1];
+            SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
+            SDL_FRect rect ={tx, ty, cell, cell};
+            SDL_RenderFillRect(renderer,&rect);
+            
+            if(val == 0) continue;
+
             SDL_Texture* texture = digit_tex[exp - 1];
             float tw = tex_w[exp - 1];
             float th = tex_h[exp - 1];
@@ -175,4 +178,6 @@ void Board::drawMessage(bool win){
 
     SDL_FRect dst = { (WIDTH-tw)/2, (HEIGHT-th)/2, tw, th };
     SDL_RenderTexture(renderer, texture, nullptr, &dst);
+
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_NONE); 
 }
