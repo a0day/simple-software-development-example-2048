@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>最小实验：事件驱动</title>
+  <style>
+    body { font-family: sans-serif; margin: 40px; }
+    button { padding: 8px 20px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <!-- 环节①：浏览器加载页面 —— 解析 HTML，构建 DOM 树。
+       下面这两个标签会变成 DOM 对象：<button> 和 <p>。
+       <script> 放在它们之后，保证 JS 执行时 DOM 已经存在。 -->
+
+  <p id="msg">我还没有被点击过。</p>
+  <button id="btn">点我</button>
+
+  <!-- 环节②：JS 给按钮"注册"一个回调函数。
+       注意：这里没有 while 循环，也没有 SDL_PollEvent——
+       我们只是告诉浏览器"点击发生时请调用这个函数"，然后交出控制权。
+       回调只在点击那一瞬间被浏览器调用，调用完立即返回。 -->
+  <script>
+    // document = 浏览器替你维护的 DOM 树的入口（类似一个现成的对象句柄）
+    const btn = document.getElementById("btn");
+    const msg = document.getElementById("msg");
+
+    let count = 0;
+
+    btn.addEventListener("click", function () {
+      // 环节③：修改 DOM 内容 —— 浏览器感知到变化，自动重绘这一小块区域。
+      // 不需要你调用任何"刷新/重绘"函数，这一点和 SDL 手动 RenderPresent 不同。
+      count++;
+      msg.textContent = "按钮已被点击 " + count + " 次。";
+    });
+  </script>
+</body>
+</html>
