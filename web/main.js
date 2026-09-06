@@ -41,6 +41,10 @@ const nums = new Nums();
 function draw(){
     ctx.fillStyle =rgb(bgColor);
     ctx.fillRect(0,0,WIDTH,HEIGHT);
+   
+    ctx.font = "30px sans-serif";
+    ctx.textAlign="center";ctx.textBaseline="middle";
+
     for(let r=0;r<4;++r){
         for(let c=0;c<4;++c){
             drawCell(r, c, nums.get(r,c));
@@ -59,8 +63,6 @@ function drawCell(r, c, val){
 
     if (val !== 0){
         ctx.fillStyle =rgb(fg[Math.log2(val)-1]);
-        ctx.font = "30px sans-serif";
-        ctx.textAlign="center";ctx.textBaseline="middle";
         ctx.fillText(val,x+cell/2,y+cell/2);
     }
 }
@@ -73,29 +75,56 @@ function rgb(color){
     return `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
 }
 
+
 draw();
-window.addEventListener("keydown",function(e){
-    const keyMap={
-        "w": "up", "arrowup": "up",
-        "a": "left", "arrowleft": "left",
-        "s": "down", "arrowdown": "down",
-        "d": "right", "arrowright": "right" 
-    };
+const keyMap={
+    "w": "up", "arrowup": "up",
+    "a": "left", "arrowleft": "left",
+    "s": "down", "arrowdown": "down",
+    "d": "right", "arrowright": "right" 
+};
+let state = "playing";
 
-    const key = e.key.toLowerCase();
-    const dir = keyMap[key];
-    if(!dir) return;
-    e.preventDefault();
-
-    if(nums.move(dir) === true){
-        nums.placeRandom();
-    }
+function restart(){
+    nums.reset();
+    state = "playing";
+    overlay.classList.add("hidden");
     draw();
+}
 
-    if(nums.isWin() === true){
-        console.log("you win");
-    }
-    else if(nums.isLose() === true){
-        console.log("game over");
+let overlay = document.getElementById("overlay");
+let restex = document.getElementById("result-text");
+let resbtn = document.getElementById("restart-btn");
+
+resbtn.addEventListener("click", restart);
+window.addEventListener("keydown",function(e){
+    if(!e.repeat){
+        const key = e.key.toLowerCase();
+        if(key === "r"){
+            restart();
+        }
+    
+        else if(state === "playing") {
+            const dir = keyMap[key];
+            if(!dir) return;
+            e.preventDefault();
+
+            if(nums.move(dir) === true){
+                nums.placeRandom();
+            
+                if(nums.isWin() === true){
+                    state = "won";
+                    restex.textContent = "you win!";
+                    overlay.classList.remove("hidden");
+                }
+                else if(nums.isLose() === true){
+                    state = "over";
+                    restex.textContent = "game over";
+                    overlay.classList.remove("hidden");
+                }
+            }
+     
+            draw();
+        }
     }
 });

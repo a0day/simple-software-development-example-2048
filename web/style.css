@@ -1,0 +1,65 @@
+.overlay.hidden {
+    display: none;
+}
+
+body {
+    background-color:#efe9dc;
+}
+
+.page {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+.game-header {
+    text-align: center;
+}
+
+.status-bar {
+    display: flex;
+    justify-content: center; 
+}
+
+.score-box{
+    background-color: #ebd6ac;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    padding: 8px 24px;
+}
+
+main { 
+    position: relative; 
+}
+
+canvas{
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.overlay{
+    position: absolute;
+    inset: 0;
+    background-color: rgba(238, 228, 218, 0.85);
+    display: flex; justify-content: center; align-items: center;
+    border-radius: 12px;
+    flex-direction: column;   /* 子元素从上到下排 */
+    gap: 12px;                /* 文字和按钮之间的间距 */
+    text-align: center;
+}
+
+#restart-btn{
+    border: none;
+    background-color: #8f7a66;
+    border-radius: 12px;
+    padding: 4px 12px;
+    cursor: pointer;
+}
+
+#restart-btn:hover { 
+    background-color: #d6cbc0;
+    transform: translateY(-2px);
+ }
