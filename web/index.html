@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>2048</title>
+
+    <!-- 样式表：框架搭好后再接入（style.css 已就位，目前为空） -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ============ ① 页面容器：对应图中整个面板，负责整体宽度与居中 ============ -->
+    <div class="page">
+
+        <!-- ======== ② 头部区 <header>：对应图中顶部的大标题"2048" ======== -->
+        <header class="game-header">
+            <h1>2048</h1>
+            <!-- 占位：以后可补一句说明文字，如"合并相同数字，直达 2048" -->
+        </header>
+
+        <!-- ======== ③ 状态区 <section>：对应图中"分数：0"那一栏 ======== -->
+        <!-- 外壳 div 管样式；span#score 是 JS 唯一要更新的数字 -->
+        <section class="status-bar" aria-label="分数显示">
+            <div class="score-box">
+                分数：<span id="score">0</span>
+            </div>
+            <!-- 占位：以后可加"重开一局"按钮 -->
+        </section>
+
+        <!-- ======== ④ 主内容区 <main>：对应图中的棋盘画布 ======== -->
+        <main>
+            <!-- width/height 属性 = 画布内部分辨率（勿与 CSS 显示尺寸混淆） -->
+            <canvas id="board" width="480" height="480">
+                您的浏览器不支持 Canvas，请更换现代浏览器。
+            </canvas>
+        </main>
+
+        <!-- ======== ⑤ 页脚区 <footer>：对应图底部的操作提示 ======== -->
+        <footer class="game-footer">
+            <p>使用方向键 / WASD 移动方块</p>
+        </footer>
+
+    </div>
+
+    <!-- ======== ⑥ 脚本区：顺序即依赖，被依赖的在前 ======== -->
+    <script src="game.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

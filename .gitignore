@@ -2,6 +2,3 @@ build/
 output/
 .vscode/
 .workbuddy/
-web\class_demo.html
-web\class_demo.js
-web\minimal_experiment.html
