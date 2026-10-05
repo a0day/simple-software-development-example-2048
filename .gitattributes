@@ -1,0 +1,9 @@
+# 统一行尾为 LF（Git 认为不是文本的文件，比如 ttf/png，不受影响）。
+#
+# 为什么需要这份：Git for Windows 默认 core.autocrlf=true，会把工作区的行尾
+# 转成 CRLF、入库时再转回 LF。结果是「文件明明没改，git status 却显示一堆被修改」。
+# 显式写死 eol=lf 就绕开了这个平台差异。
+#
+# 放在仓库根，是为了覆盖整个仓库（cli/ gui/ common/ web/ 这些 C++ 和 Web 文件）；
+# godot/ 下另有一份自己的，作用范围更具体，优先级更高。
+* text=auto eol=lf

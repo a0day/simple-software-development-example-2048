@@ -1,0 +1,8 @@
+# Normalize EOL for all files that Git considers text files.
+* text=auto eol=lf
+
+# 强制把一个 .gd 认定为 GDScript。
+# Linguist（GitHub 用来判断语言的那套规则）里，".gd" 这个扩展名被 GDScript
+# 和 GAP（一种数学语言）同时声明，确实出现过被识别成 GAP 的实例。
+# 这行不影响运行，只影响 GitHub 上语言条的归类与高亮。
+*.gd linguist-language=GDScript

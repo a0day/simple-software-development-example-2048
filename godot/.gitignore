@@ -1,0 +1,6 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# 从 CSV 生成的二进制翻译文件（当前还没用到，先备着）
+*.translation
