@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://cukft5pb5035q"]
+
+[ext_resource type="Script" uid="uid://dwq10frb8hj3o" path="res://script/board.gd" id="1_b3264"]
+[ext_resource type="Script" uid="uid://dutwcvopkq6jy" path="res://script/grid.gd" id="2_32fhn"]
+
+[sub_resource type="GDScript" id="GDScript_32fhn"]
+script/source = "extends TextureRect
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[node name="board" type="Node2D" unique_id=677759320]
+
+[node name="BG" type="ColorRect" parent="." unique_id=491396329]
+offset_right = 410.0
+offset_bottom = 410.0
+color = Color(0.73333335, 0.6784314, 0.627451, 1)
+
+[node name="board" type="Control" parent="." unique_id=735078508]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 410.0
+offset_bottom = 410.0
+script = ExtResource("1_b3264")
+
+[node name="grid" type="Control" parent="." unique_id=1131191511]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 410.0
+offset_bottom = 410.0
+script = ExtResource("2_32fhn")
+
+[node name="TextureRect" type="TextureRect" parent="grid" unique_id=691315804]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = SubResource("GDScript_32fhn")

@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://cukft5pb5035q"]
+
+[ext_resource type="Script" uid="uid://dwq10frb8hj3o" path="res://script/BGboard.gd" id="1_b3264"]
+[ext_resource type="Script" uid="uid://dutwcvopkq6jy" path="res://script/grid.gd" id="2_32fhn"]
+
+[node name="board" type="Node2D" unique_id=677759320]
+
+[node name="BG" type="ColorRect" parent="." unique_id=491396329]
+offset_right = 410.0
+offset_bottom = 410.0
+color = Color(0.73333335, 0.6784314, 0.627451, 1)
+
+[node name="BGboard" type="Control" parent="." unique_id=735078508]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 410.0
+offset_bottom = 410.0
+script = ExtResource("1_b3264")
+
+[node name="grid" type="Control" parent="." unique_id=1131191511]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 410.0
+offset_bottom = 410.0
+script = ExtResource("2_32fhn")

@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://dxdsxtxlyjo3r"]
+
+[ext_resource type="PackedScene" uid="uid://cukft5pb5035q" path="res://scene/board.tscn" id="1_5kiuu"]
+[ext_resource type="Script" uid="uid://ckujhcmm1uptx" path="res://script/game.gd" id="1_dbls1"]
+[ext_resource type="Script" uid="uid://ejaapykrjjvs" path="res://script/overlay.gd" id="3_33cqm"]
+
+[node name="game" type="Node2D" unique_id=243241102]
+script = ExtResource("1_dbls1")
+
+[node name="board" parent="." unique_id=677759320 instance=ExtResource("1_5kiuu")]
+
+[node name="overlay" type="CanvasLayer" parent="." unique_id=1299258255]
+script = ExtResource("3_33cqm")
+
+[node name="dimmer" type="ColorRect" parent="overlay" unique_id=417971539]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.3764706)
+
+[node name="finaltex" type="Label" parent="overlay" unique_id=1302082551]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.45
+anchor_right = 0.5
+anchor_bottom = 0.55
+offset_left = -60.5
+offset_top = -22.5
+offset_right = 60.5
+offset_bottom = 22.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.011764706, 0.011764706, 0.011764706, 1)
+theme_override_font_sizes/font_size = 32
+
+[node name="Button" type="Button" parent="overlay" unique_id=557667668]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.551
+anchor_right = 0.5
+anchor_bottom = 0.551
+offset_left = -30.5
+offset_top = -15.5
+offset_right = 30.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "restart"
+
+[connection signal="pressed" from="overlay/Button" to="overlay" method="_on_button_pressed"]
